@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Berry's Shop 🩵</title>
+<title>Berry's Shop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -16,1112 +18,732 @@
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:#dff4ff;
-    color:#40546b;
+    font-family:"Poppins","Fredoka",sans-serif;
+    background:linear-gradient(135deg,#e9f8ff,#dff3ff,#f5fcff);
     min-height:100vh;
+    color:#28485a;
 }
 
-button,input{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-.page{
-    min-height:100vh;
-    overflow:hidden;
-    position:relative;
-}
-
-/* Background decorations */
-
-.bubble{
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:0;
-}
-
-.b1{
-    width:190px;
-    height:190px;
-    background:#fff;
-    top:-70px;
-    left:-60px;
-    opacity:.5;
-}
-
-.b2{
-    width:150px;
-    height:150px;
-    background:#bce9ff;
-    right:-60px;
-    top:180px;
-    opacity:.45;
-}
-
-.b3{
-    width:110px;
-    height:110px;
-    background:#fff;
-    left:-45px;
-    bottom:90px;
-    opacity:.45;
-}
-
-/* Header */
-
-.header{
-    position:relative;
-    z-index:2;
+header{
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(12px);
+    padding:20px;
     text-align:center;
-    padding:36px 18px 22px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 3px 18px rgba(80,160,200,.12);
 }
 
-.logo{
-    font-family:'Fredoka',sans-serif;
-    font-size:43px;
+header h1{
+    color:#58aeda;
+    font-size:30px;
     font-weight:700;
-    color:#4b91bd;
-    text-shadow:2px 3px 0 #fff;
 }
 
-.subtitle{
-    margin-top:5px;
-    color:#7597ae;
-    font-size:12px;
+header p{
+    font-size:13px;
+    color:#7896a5;
+    margin-top:3px;
 }
-
-.decor{
-    margin-top:13px;
-    font-size:19px;
-}
-
-/* Main */
 
 .container{
-    width:min(700px,92%);
+    max-width:600px;
     margin:auto;
-    position:relative;
-    z-index:2;
-    padding-bottom:55px;
+    padding:22px 15px 100px;
 }
 
 .card{
-    background:rgba(255,255,255,.94);
-    border:2px solid #fff;
-    border-radius:25px;
-    padding:22px;
+    background:rgba(255,255,255,.92);
+    border-radius:22px;
+    padding:20px;
     margin-bottom:18px;
-    box-shadow:0 12px 35px rgba(75,135,165,.14);
+    box-shadow:0 8px 25px rgba(80,160,200,.12);
 }
 
-.card-title{
-    font-family:'Fredoka',sans-serif;
-    color:#4b91bd;
-    font-size:22px;
-    margin-bottom:5px;
+.title{
+    font-size:21px;
+    font-weight:700;
+    color:#4a9bc5;
+    margin-bottom:15px;
 }
-
-.card-desc{
-    font-size:12px;
-    color:#8ba2b4;
-    margin-bottom:17px;
-}
-
-/* Products */
 
 .products{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:11px;
+    gap:12px;
 }
 
 .product{
+    border:2px solid #e1f4fc;
+    border-radius:18px;
+    padding:15px 10px;
     text-align:center;
-    background:#f7fcff;
-    border:2px solid #e1f3fb;
-    border-radius:19px;
-    padding:15px 9px;
+    cursor:pointer;
+    background:#fbfeff;
     transition:.2s;
 }
 
 .product:hover{
-    transform:translateY(-3px);
-    border-color:#b9e5f8;
+    transform:translateY(-2px);
+    border-color:#86c9e8;
+}
+
+.product.selected{
+    border-color:#56add8;
+    background:#eaf8ff;
+    box-shadow:0 5px 15px rgba(70,170,220,.15);
 }
 
 .bean{
-    font-size:27px;
+    font-size:30px;
 }
 
-.bean-name{
-    color:#536b80;
-    font-size:14px;
-    font-weight:600;
-    margin-top:4px;
+.product h3{
+    margin-top:5px;
+    font-size:16px;
+    color:#47758b;
 }
 
 .price{
-    color:#4c9bc9;
-    font-size:15px;
+    color:#58aeda;
     font-weight:700;
-    margin:4px 0 10px;
+    margin-top:5px;
 }
-
-.select-btn{
-    width:100%;
-    border:0;
-    border-radius:12px;
-    padding:9px;
-    background:#bde8fb;
-    color:#3f789a;
-    font-weight:700;
-}
-
-.select-btn:hover{
-    background:#a9def5;
-}
-
-/* Form */
 
 label{
     display:block;
-    margin:12px 0 6px;
-    color:#587187;
-    font-size:13px;
+    font-size:14px;
     font-weight:600;
+    margin:12px 0 6px;
+    color:#527486;
 }
 
 input{
     width:100%;
-    padding:12px 14px;
+    border:2px solid #e4f3f9;
     border-radius:13px;
-    border:2px solid #e0f1f9;
-    background:#fbfeff;
-    color:#526a7d;
+    padding:13px;
+    font-family:inherit;
     outline:none;
+    background:#fbfeff;
 }
 
 input:focus{
-    border-color:#a9dff5;
+    border-color:#72bee0;
+}
+
+.wave{
+    background:#eaf8ff;
+    border:2px dashed #86c9e8;
+    border-radius:17px;
+    padding:15px;
+    margin-top:15px;
+}
+
+.wave strong{
+    color:#3595c7;
+}
+
+button{
+    width:100%;
+    border:0;
+    border-radius:14px;
+    padding:14px;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:14px;
 }
 
 .primary{
-    width:100%;
-    margin-top:15px;
-    padding:13px;
-    border:0;
-    border-radius:14px;
-    background:#76b9dd;
+    background:#62b7df;
     color:white;
-    font-weight:700;
-    box-shadow:0 7px 15px rgba(75,150,195,.18);
+    box-shadow:0 5px 15px rgba(70,170,220,.2);
 }
 
 .primary:hover{
-    background:#64aacf;
+    background:#4ba8d5;
 }
 
 .secondary{
-    width:100%;
-    margin-top:10px;
-    padding:12px;
-    border:2px solid #d2edf8;
-    border-radius:14px;
-    background:white;
-    color:#5688a5;
-    font-weight:600;
+    background:#eef8fc;
+    color:#52839a;
 }
 
-/* Selected package */
-
-.status{
-    padding:13px;
-    border-radius:14px;
-    margin-top:13px;
-    text-align:center;
-    font-size:13px;
-    background:#effaff;
-    color:#56829b;
+.danger{
+    background:#ffdfe3;
+    color:#c65c69;
 }
 
 .success{
-    background:#eafaf1;
-    color:#4c936e;
+    background:#e0f8ea;
+    color:#4c9b6a;
 }
 
-.error{
-    background:#fff0f3;
-    color:#b55e6e;
+.hidden{
+    display:none !important;
 }
 
-/* Payment */
-
-.wave-box{
-    background:#eaf8ff;
-    border:2px dashed #a9dbf1;
-    border-radius:19px;
-    padding:18px;
-    margin-top:12px;
-}
-
-.wave-title{
-    font-family:'Fredoka',sans-serif;
-    color:#4b91bd;
-    font-size:20px;
-}
-
-.wave-number{
-    color:#3c83af;
-    font-size:22px;
-    font-weight:700;
-    margin-top:7px;
-    letter-spacing:.5px;
-}
-
-.wave-owner{
-    color:#718b9d;
-    font-size:13px;
-    margin-top:2px;
-}
-
-.amount{
-    color:#657c91;
-    font-weight:700;
-    margin-top:9px;
-}
-
-.info{
-    color:#8198a9;
-    font-size:12px;
-    line-height:1.8;
-    margin-top:9px;
-}
-
-/* Admin */
-
-.admin-btn{
+.status{
     text-align:center;
-}
-
-.admin-btn button{
-    border:0;
-    background:transparent;
-    color:#7894a8;
-    font-size:12px;
-    text-decoration:underline;
-}
-
-.admin-panel{
-    background:#f7fcff;
-    border:2px solid #d9f0fb;
-    border-radius:20px;
-    padding:17px;
+    padding:18px;
+    border-radius:17px;
+    background:#f2fbff;
     margin-top:15px;
 }
 
-.order{
-    background:#fff;
-    border:2px solid #e3f3fa;
-    border-radius:17px;
-    padding:15px;
-    margin-bottom:12px;
+.status h2{
+    color:#59a9d0;
+    margin-bottom:7px;
 }
 
-.order h4{
-    font-family:'Fredoka',sans-serif;
-    color:#4e8bae;
-    font-size:18px;
-    margin-bottom:5px;
-}
-
-.order p{
-    color:#708799;
+.small{
     font-size:12px;
-    line-height:1.8;
+    color:#7b98a5;
 }
 
-.order-buttons{
-    display:flex;
-    gap:8px;
-    margin-top:10px;
-}
-
-.approve,
-.reject{
-    flex:1;
-    border:0;
-    padding:10px;
-    border-radius:12px;
-    font-weight:700;
-}
-
-.approve{
-    background:#bcebd0;
-    color:#4d8d69;
-}
-
-.reject{
-    background:#ffd5dc;
-    color:#a45d69;
-}
-
-.receipt-name{
-    margin-top:7px;
-    padding:8px;
-    border-radius:10px;
-    background:#f3fbff;
-    color:#62849a;
-    font-size:11px;
-}
-
-/* Done */
-
-.done{
-    text-align:center;
-}
-
-.done-icon{
-    font-size:55px;
-}
-
-.done h2{
-    font-family:'Fredoka',sans-serif;
-    color:#4c9b74;
-    margin:8px 0;
-}
-
-.done-info{
-    background:#f0fbf5;
-    border-radius:17px;
+.admin-box{
+    background:#f8fcff;
+    border:1px solid #e3f3f9;
+    border-radius:16px;
     padding:15px;
-    text-align:left;
+    margin-top:12px;
+}
+
+.order-item{
+    background:white;
+    border:1px solid #e3f3f9;
+    border-radius:16px;
+    padding:15px;
+    margin-top:12px;
+}
+
+.order-item p{
     font-size:13px;
-    line-height:2;
+    margin:5px 0;
 }
 
-/* Music */
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    background:#eaf8ff;
+    color:#4c9ec5;
+}
 
-.music{
+.music-button{
     position:fixed;
-    right:16px;
-    bottom:17px;
-    z-index:20;
-}
-
-.music button{
+    right:17px;
+    bottom:18px;
     width:53px;
     height:53px;
-    border:3px solid white;
     border-radius:50%;
-    background:#8bc7e4;
-    color:white;
-    font-size:21px;
-    box-shadow:0 7px 20px rgba(67,137,173,.25);
+    padding:0;
+    margin:0;
+    background:white;
+    color:#55aeda;
+    box-shadow:0 5px 20px rgba(70,150,190,.22);
+    z-index:100;
+    font-size:23px;
 }
 
-/* Footer */
-
-.footer{
+footer{
     text-align:center;
-    color:#7f9caf;
-    font-size:11px;
     padding:20px;
-}
-
-/* Mobile */
-
-@media(max-width:480px){
-
-    .logo{
-        font-size:36px;
-    }
-
-    .container{
-        width:94%;
-    }
-
-    .card{
-        padding:17px;
-    }
-
-    .products{
-        gap:9px;
-    }
-
-    .product{
-        padding:13px 7px;
-    }
+    color:#8ca8b5;
+    font-size:12px;
 }
 </style>
 </head>
 
-
 <body>
 
-<div class="page">
-
-<div class="bubble b1"></div>
-<div class="bubble b2"></div>
-<div class="bubble b3"></div>
-
-
-<!-- HEADER -->
-
-<header class="header">
-
-    <div class="logo">
-        Berry's Shop
-    </div>
-
-    <div class="subtitle">
-        Cute little shop for your Mochi Beans 🩵
-    </div>
-
-    <div class="decor">
-        🫧 🫘 🩵 🍓 🫧
-    </div>
-
+<header>
+    <h1>Berry's Shop 🍓</h1>
+    <p>Mochi Chat Beans</p>
 </header>
 
+<div class="container">
 
-<main class="container">
+    <!-- SHOP -->
+    <section class="card">
+        <div class="title">🍓 Mochi Bean Price</div>
 
+        <div class="products">
 
-<!-- PRICE -->
+            <div class="product" onclick="selectProduct(100,2100,this)">
+                <div class="bean">🍓</div>
+                <h3>100 Beans</h3>
+                <div class="price">2,100 Ks</div>
+            </div>
 
-<section class="card">
+            <div class="product" onclick="selectProduct(200,6500,this)">
+                <div class="bean">🍓</div>
+                <h3>200 Beans</h3>
+                <div class="price">6,500 Ks</div>
+            </div>
 
-    <div class="card-title">
-        🫘 Mochi Chat Beans Price
-    </div>
+            <div class="product" onclick="selectProduct(500,13000,this)">
+                <div class="bean">🍓</div>
+                <h3>500 Beans</h3>
+                <div class="price">13,000 Ks</div>
+            </div>
 
-    <div class="card-desc">
-        Choose your favorite Bean package ✨
-    </div>
+            <div class="product" onclick="selectProduct(1000,19500,this)">
+                <div class="bean">🍓</div>
+                <h3>1000 Beans</h3>
+                <div class="price">19,500 Ks</div>
+            </div>
 
+            <div class="product" onclick="selectProduct(2800,45000,this)">
+                <div class="bean">🍓</div>
+                <h3>2800 Beans</h3>
+                <div class="price">45,000 Ks</div>
+            </div>
 
-    <div class="products">
+            <div class="product" onclick="selectProduct(4000,47500,this)">
+                <div class="bean">🍓</div>
+                <h3>4000 Beans</h3>
+                <div class="price">47,500 Ks</div>
+            </div>
 
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">100 Beans</div>
-            <div class="price">2,100 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(100,2100)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">200 Beans</div>
-            <div class="price">6,500 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(200,6500)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">500 Beans</div>
-            <div class="price">13,000 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(500,13000)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">1,000 Beans</div>
-            <div class="price">19,500 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(1000,19500)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">2,800 Beans</div>
-            <div class="price">45,000 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(2800,45000)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">4,000 Beans</div>
-            <div class="price">47,500 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(4000,47500)">
-                Choose
-            </button>
-        </div>
-
-
-        <div class="product">
-            <div class="bean">🫘</div>
-            <div class="bean-name">6,000 Beans</div>
-            <div class="price">85,000 Ks</div>
-            <button class="select-btn"
-                onclick="chooseBean(6000,85000)">
-                Choose
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ORDER -->
-
-<section class="card hidden" id="orderCard">
-
-    <div class="card-title">
-        🛒 Your Order
-    </div>
-
-    <div class="status" id="selectedPackage"></div>
-
-
-    <label>Your Name</label>
-
-    <input
-        type="text"
-        id="customerName"
-        placeholder="Enter your name"
-    >
-
-
-    <label>Telegram / Contact</label>
-
-    <input
-        type="text"
-        id="contact"
-        placeholder="@username"
-    >
-
-
-    <label>Bean Package</label>
-
-    <input
-        type="text"
-        id="beanPackage"
-        readonly
-    >
-
-
-    <label>Total Amount</label>
-
-    <input
-        type="text"
-        id="totalAmount"
-        readonly
-    >
-
-
-    <button class="primary"
-        onclick="showPayment()">
-
-        Continue to Payment 🩵
-
-    </button>
-
-</section>
-
-
-<!-- PAYMENT -->
-
-<section class="card hidden" id="paymentCard">
-
-    <div class="card-title">
-        💳 Wave Payment
-    </div>
-
-
-    <div class="wave-box">
-
-        <div class="wave-title">
-            Wave Money 🩵
-        </div>
-
-
-        <div class="wave-number">
-            09428232096
-        </div>
-
-
-        <div class="wave-owner">
-            NK
-        </div>
-
-
-        <div class="amount">
-            Amount:
-            <span id="paymentAmount">0</span>
-            Ks
-        </div>
-
-
-        <div class="info">
-
-            ① အထက်ပါ Wave နံပါတ်သို့ ငွေလွှဲပါ။<br>
-
-            ② ငွေလွှဲပြီးပါက ပြေစာ Screenshot/File တင်ပါ။<br>
-
-            ③ Admin စစ်ဆေးပြီးမှ Mochi ID တောင်းပါမည်။
+            <div class="product" onclick="selectProduct(6000,85000,this)">
+                <div class="bean">🍓</div>
+                <h3>6000 Beans</h3>
+                <div class="price">85,000 Ks</div>
+            </div>
 
         </div>
-
-    </div>
-
-
-    <label>
-        🧾 Payment Receipt
-    </label>
+    </section>
 
 
-    <input
-        type="file"
-        id="receipt"
-        accept="image/*,.pdf"
-    >
+    <!-- ORDER FORM -->
+    <section class="card" id="orderCard">
 
+        <div class="title">🛒 Place Order</div>
 
-    <button class="primary"
-        onclick="submitOrder()">
+        <div id="selectedBox" class="status">
+            <p class="small">အပေါ်က Bean Package တစ်ခုကို ရွေးပေးပါ</p>
+        </div>
 
-        Submit Order 🫧
+        <label>Your Name</label>
+        <input id="customerName" type="text" placeholder="Name">
 
-    </button>
+        <label>Contact</label>
+        <input id="customerContact" type="text" placeholder="Telegram / Phone">
 
+        <div class="wave">
+            <div>💙 <strong>Wave Payment</strong></div>
+            <p style="margin-top:7px;">
+                Number : <strong>09428232096</strong>
+            </p>
+            <p>
+                Name : <strong>NK</strong>
+            </p>
+        </div>
 
-    <div id="submitStatus"></div>
+        <label>Payment Amount</label>
+        <input id="paymentAmount" type="text" readonly placeholder="Package ရွေးပါ">
 
-</section>
+        <label>Payment Receipt</label>
+        <input id="receipt" type="file" accept="image/*">
 
-
-<!-- CUSTOMER STATUS -->
-
-<section
-    class="card hidden"
-    id="customerStatusCard">
-
-    <div class="card-title">
-        📦 Order Status
-    </div>
-
-
-    <div
-        class="status"
-        id="customerStatus">
-
-        🕐 Waiting for Admin verification.
-
-    </div>
-
-
-    <div
-        id="mochiIdBox"
-        class="hidden">
-
-        <label>
-            🆔 Your Mochi ID
-        </label>
-
-
-        <input
-            type="text"
-            id="mochiId"
-            placeholder="Enter your Mochi ID"
-        >
-
-
-        <button
-            class="primary"
-            onclick="sendMochiId()">
-
-            Submit Mochi ID 🩵
-
+        <button class="primary" onclick="placeOrder()">
+            Submit Order 🍓
         </button>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- DONE -->
+    <!-- CUSTOMER STATUS -->
+    <section class="card hidden" id="customerStatusCard">
 
-<section
-    class="card hidden done"
-    id="doneCard">
+        <div class="title">📦 Order Status</div>
 
-    <div class="done-icon">
-        🎉
-    </div>
+        <div id="customerStatus" class="status"></div>
 
+        <div id="mochiIdBox" class="hidden">
 
-    <h2>
-        ORDER DONE!
-    </h2>
+            <label>Mochi ID</label>
+            <input id="mochiId" type="text" placeholder="Enter Mochi ID">
 
+            <button class="primary" onclick="submitMochiId()">
+                Submit Mochi ID
+            </button>
 
-    <p class="card-desc">
-        Your order has been completed successfully 🩵
-    </p>
+        </div>
 
-
-    <div
-        class="done-info"
-        id="doneInfo">
-    </div>
-
-</section>
-
-
-<!-- ADMIN -->
-
-<section class="card">
-
-    <div class="admin-btn">
-
-        <button onclick="openAdminLogin()">
-
-            🔐 Admin
-
-        </button>
-
-    </div>
+    </section>
 
 
     <!-- ADMIN LOGIN -->
+    <section class="card">
 
-    <div
-        id="adminLogin"
-        class="hidden">
+        <div class="title">🔐 Admin</div>
 
-        <div class="admin-panel">
-
-            <div class="card-title">
-                🔐 Admin Login
-            </div>
-
-
-            <label>
-                Admin PIN
-            </label>
-
+        <div id="adminLogin">
 
             <input
-                type="password"
                 id="adminPin"
-                placeholder="Enter Admin PIN"
-                maxlength="20"
+                type="password"
+                placeholder="Admin PIN"
             >
 
-
-            <button
-                class="primary"
-                onclick="loginAdmin()">
-
+            <button class="primary" onclick="adminLogin()">
                 Login
-
             </button>
-
-
-            <div id="loginStatus"></div>
 
         </div>
 
-    </div>
 
+        <!-- ADMIN DASHBOARD -->
+        <div id="adminDashboard" class="hidden">
 
-    <!-- ADMIN DASHBOARD -->
-
-    <div
-        id="adminDashboard"
-        class="hidden">
-
-        <div class="admin-panel">
-
-            <div class="card-title">
-                👑 Berry's Admin
+            <div class="status">
+                <h2>👑 Admin Dashboard</h2>
+                <p class="small">Berry's Shop Orders</p>
             </div>
-
-
-            <div class="card-desc">
-                Manage customer orders
-            </div>
-
 
             <div id="ordersList"></div>
 
-
-            <button
-                class="secondary"
-                onclick="logoutAdmin()">
-
+            <button class="danger" onclick="adminLogout()">
                 Logout
-
             </button>
 
         </div>
 
-    </div>
-
-</section>
-
-
-<div class="footer">
-    Made with 🩵 for Berry's Shop
-</div>
-
-</main>
+    </section>
 
 </div>
+
+
+<footer>
+    Berry's Shop 🍓
+</footer>
 
 
 <!-- MUSIC -->
 
-<div class="music">
-
-    <button
-        onclick="toggleMusic()"
-        id="musicBtn">
-
-        🎵
-
-    </button>
-
-</div>
-
-
-<!--
-IMPORTANT:
-Put this MP4 file in the SAME folder as index.html
-
-VID_20260906_123539_210.mp4
--->
-
+<!-- MAIN SONG -->
 <video
-    id="music"
-    src="VID_20260906_123539_210.mp4"
+    id="mainMusic"
+    src="./VID_20260906_123539_210.mp4"
     loop
     playsinline
-    style="display:none;">
+    preload="auto"
+    style="
+    position:fixed;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+    left:-10px;
+    top:-10px;">
+</video>
+
+<!-- FAIL SONG -->
+<video
+    id="failMusic"
+    src="./VID_20260906_125122_003.mp4"
+    playsinline
+    preload="auto"
+    style="
+    position:fixed;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+    left:-10px;
+    top:-10px;">
+</video>
+
+<!-- SUCCESS SONG -->
+<video
+    id="successMusic"
+    src="./VID_20260906_125424_734.mp4"
+    playsinline
+    preload="auto"
+    style="
+    position:fixed;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+    left:-10px;
+    top:-10px;">
 </video>
 
 
+<button
+    class="music-button"
+    id="musicButton"
+    onclick="manualMusic()">
+    🔊
+</button>
+
+
 <script>
-
-/* =====================================================
-   BERRY'S SHOP SETTINGS
-   ===================================================== */
-
-/* Admin PIN */
-const ADMIN_PIN = "2*13";
-
-
-/* Wave Payment */
-const WAVE_NUMBER = "09428232096";
-const WAVE_NAME = "NK";
-
-
-/* =====================================================
-   VARIABLES
-   ===================================================== */
 
 let selectedBeans = 0;
 let selectedPrice = 0;
 let currentOrderId = null;
 
+const ADMIN_PIN = "2*13";
 
-/* =====================================================
-   CHOOSE BEAN
-   ===================================================== */
+const mainMusic = document.getElementById("mainMusic");
+const failMusic = document.getElementById("failMusic");
+const successMusic = document.getElementById("successMusic");
 
-function chooseBean(beans, price){
+let musicStarted = false;
+
+
+/* =========================
+   MUSIC SYSTEM
+========================= */
+
+function startMainMusic(){
+
+    if(musicStarted) return;
+
+    mainMusic.volume = 1;
+    mainMusic.loop = true;
+
+    mainMusic.play()
+    .then(() => {
+
+        musicStarted = true;
+
+        document.getElementById("musicButton").innerHTML = "🔊";
+
+    })
+    .catch(() => {
+
+        /*
+        Browser autoplay blocked.
+        First screen touch will start it.
+        */
+
+        document.getElementById("musicButton").innerHTML = "🎵";
+
+    });
+}
+
+
+/*
+   ဝင်ဝင်ချင်း စမ်းဖွင့်
+*/
+window.addEventListener("load", () => {
+
+    startMainMusic();
+
+});
+
+
+/*
+   Browser က autoplay ပိတ်ထားရင်
+   user ပထမဆုံး screen ကိုထိတာနဲ့
+   Main Song စမယ်
+*/
+
+document.addEventListener("click", () => {
+
+    if(!musicStarted){
+        startMainMusic();
+    }
+
+}, {once:false});
+
+
+function stopMainMusic(){
+
+    mainMusic.pause();
+    mainMusic.currentTime = 0;
+
+    musicStarted = false;
+}
+
+
+function playFailSong(){
+
+    stopMainMusic();
+
+    failMusic.currentTime = 0;
+    failMusic.volume = 1;
+
+    failMusic.play().catch(() => {});
+
+    /*
+       Fail Song ပြီးရင် Main Song ပြန်စ
+    */
+
+    failMusic.onended = () => {
+
+        startMainMusic();
+
+    };
+}
+
+
+function playSuccessSong(){
+
+    stopMainMusic();
+
+    successMusic.currentTime = 0;
+    successMusic.volume = 1;
+
+    successMusic.play().catch(() => {});
+
+    /*
+       Success Song ပြီးရင် Main Song ပြန်စ
+    */
+
+    successMusic.onended = () => {
+
+        startMainMusic();
+
+    };
+}
+
+
+function manualMusic(){
+
+    if(mainMusic.paused){
+
+        mainMusic.play()
+        .then(() => {
+
+            musicStarted = true;
+            document.getElementById("musicButton").innerHTML = "🔊";
+
+        })
+        .catch(() => {
+
+            alert(
+                "သီချင်းမဖွင့်နိုင်သေးပါ 🥺\n\n" +
+                "VID_20260906_123539_210.mp4 ကို " +
+                "index.html နဲ့ folder တစ်ခုတည်းမှာထားထားတာ စစ်ပေးပါ။"
+            );
+
+        });
+
+    }else{
+
+        mainMusic.pause();
+        musicStarted = false;
+
+        document.getElementById("musicButton").innerHTML = "🎵";
+
+    }
+
+}
+
+
+/* =========================
+   PRODUCT
+========================= */
+
+function selectProduct(beans, price, element){
 
     selectedBeans = beans;
     selectedPrice = price;
 
+    document.querySelectorAll(".product")
+    .forEach(item => {
 
-    document
-        .getElementById("orderCard")
-        .classList.remove("hidden");
+        item.classList.remove("selected");
 
+    });
 
-    document
-        .getElementById("selectedPackage")
-        .innerText =
-        "🫘 " +
-        beans.toLocaleString() +
-        " Beans — " +
-        price.toLocaleString() +
-        " Ks";
+    element.classList.add("selected");
 
+    document.getElementById("selectedBox").innerHTML = `
+        <h2>${beans.toLocaleString()} Beans 🍓</h2>
+        <p>${price.toLocaleString()} Ks</p>
+    `;
 
-    document
-        .getElementById("beanPackage")
-        .value =
-        beans.toLocaleString() + " Beans";
-
-
-    document
-        .getElementById("totalAmount")
-        .value =
+    document.getElementById("paymentAmount").value =
         price.toLocaleString() + " Ks";
 
-
-    document
-        .getElementById("orderCard")
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
 }
 
 
-/* =====================================================
-   PAYMENT
-   ===================================================== */
+/* =========================
+   ORDER
+========================= */
 
-function showPayment(){
+function placeOrder(){
 
-    const name =
-        document
-        .getElementById("customerName")
-        .value.trim();
+    if(selectedBeans === 0){
 
-
-    const contact =
-        document
-        .getElementById("contact")
-        .value.trim();
-
-
-    if(!name || !contact){
-
-        alert(
-            "Please enter your name and contact information 🩵"
-        );
-
+        alert("Bean Package ရွေးပေးပါ 🍓");
         return;
+
     }
 
-
-    document
-        .getElementById("paymentCard")
-        .classList.remove("hidden");
-
-
-    document
-        .getElementById("paymentAmount")
-        .innerText =
-        selectedPrice.toLocaleString();
-
-
-    document
-        .getElementById("paymentCard")
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-}
-
-
-/* =====================================================
-   SUBMIT ORDER
-   ===================================================== */
-
-function submitOrder(){
-
     const name =
-        document
-        .getElementById("customerName")
-        .value.trim();
-
+        document.getElementById("customerName").value.trim();
 
     const contact =
-        document
-        .getElementById("contact")
-        .value.trim();
-
+        document.getElementById("customerContact").value.trim();
 
     const receipt =
-        document
-        .getElementById("receipt")
-        .files[0];
+        document.getElementById("receipt").files[0];
 
+
+    if(!name){
+
+        alert("Name ထည့်ပေးပါ");
+        return;
+
+    }
+
+    if(!contact){
+
+        alert("Contact ထည့်ပေးပါ");
+        return;
+
+    }
 
     if(!receipt){
 
-        alert(
-            "Please upload your payment receipt 🧾"
-        );
-
+        alert("Payment Receipt ထည့်ပေးပါ");
         return;
+
     }
-
-
-    const orderId =
-        "BERRY-" +
-        Date.now().toString().slice(-6);
-
-
-    currentOrderId = orderId;
 
 
     const order = {
 
-        id:orderId,
+        id: Date.now(),
 
-        name:name,
+        name: name,
 
-        contact:contact,
+        contact: contact,
 
-        beans:selectedBeans,
+        beans: selectedBeans,
 
-        price:selectedPrice,
+        price: selectedPrice,
 
-        receiptName:receipt.name,
+        receipt: receipt.name,
 
-        status:"pending",
+        status: "pending",
 
-        mochiId:"",
+        mochiId: "",
 
-        date:new Date().toLocaleString()
+        createdAt: new Date().toLocaleString()
 
     };
 
 
     let orders =
-        JSON.parse(
-            localStorage.getItem("berryOrders") || "[]"
-        );
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
 
 
     orders.push(order);
-
 
     localStorage.setItem(
         "berryOrders",
@@ -1129,455 +751,443 @@ function submitOrder(){
     );
 
 
-    document
-        .getElementById("submitStatus")
-        .innerHTML =
-
-        `<div class="status success">
-
-            🩵 Order submitted successfully!<br>
-
-            Order ID:
-            <b>${orderId}</b><br>
-
-            Please wait for Admin verification.
-
-        </div>`;
+    currentOrderId = order.id;
 
 
-    document
-        .getElementById("customerStatusCard")
+    document.getElementById("customerStatusCard")
         .classList.remove("hidden");
 
 
-    document
-        .getElementById("customerStatus")
-        .innerHTML =
-        "🕐 Waiting for Admin to verify your payment.";
+    document.getElementById("customerStatus").innerHTML = `
+        <h2>⏳ ORDER PENDING</h2>
+
+        <p>
+        Your ${selectedBeans.toLocaleString()} Beans order
+        has been submitted.
+        </p>
+
+        <p class="small" style="margin-top:7px;">
+        Admin က Payment Receipt စစ်နေပါတယ်။
+        </p>
+    `;
 
 
-    document
-        .getElementById("customerStatusCard")
+    alert(
+        "Order တင်ပြီးပါပြီ 🍓\n\n" +
+        "Admin စစ်ပြီးရင် Status ပြောင်းပါမယ်။"
+    );
+
+
+    document.getElementById("orderCard")
         .scrollIntoView({
-            behavior:"smooth",
-            block:"center"
+            behavior:"smooth"
         });
 
 
-    refreshAdminOrders();
+    if(document.getElementById("adminDashboard")
+        .classList.contains("hidden") === false){
+
+        loadOrders();
+
+    }
+
 }
 
 
-/* =====================================================
+/* =========================
    ADMIN LOGIN
-   ===================================================== */
+========================= */
 
-function openAdminLogin(){
-
-    document
-        .getElementById("adminLogin")
-        .classList.remove("hidden");
-
-
-    document
-        .getElementById("adminPin")
-        .focus();
-}
-
-
-function loginAdmin(){
+function adminLogin(){
 
     const pin =
-        document
-        .getElementById("adminPin")
-        .value;
+        document.getElementById("adminPin").value;
 
 
-    if(pin === ADMIN_PIN){
+    if(pin !== ADMIN_PIN){
 
-        document
-            .getElementById("adminLogin")
-            .classList.add("hidden");
+        alert("Admin PIN မှားနေပါတယ် ❌");
 
+        /*
+           Login fail ဖြစ်ရင်
+           Fail Song ကြား
+        */
 
-        document
-            .getElementById("adminDashboard")
-            .classList.remove("hidden");
+        playFailSong();
 
-
-        refreshAdminOrders();
+        return;
 
     }
 
-    else{
 
-        document
-            .getElementById("loginStatus")
-            .innerHTML =
-
-            `<div class="status error">
-
-                ❌ Incorrect Admin PIN
-
-            </div>`;
-    }
-}
-
-
-/* =====================================================
-   LOGOUT
-   ===================================================== */
-
-function logoutAdmin(){
-
-    document
-        .getElementById("adminDashboard")
+    document.getElementById("adminLogin")
         .classList.add("hidden");
 
 
-    document
-        .getElementById("adminPin")
-        .value = "";
+    document.getElementById("adminDashboard")
+        .classList.remove("hidden");
+
+
+    loadOrders();
+
 }
 
 
-/* =====================================================
-   GET ORDERS
-   ===================================================== */
+/* =========================
+   ADMIN LOGOUT
+========================= */
 
-function getOrders(){
+function adminLogout(){
 
-    return JSON.parse(
-        localStorage.getItem("berryOrders") || "[]"
-    );
+    document.getElementById("adminLogin")
+        .classList.remove("hidden");
+
+    document.getElementById("adminDashboard")
+        .classList.add("hidden");
+
+    document.getElementById("adminPin").value = "";
+
 }
 
 
-/* =====================================================
-   ADMIN ORDERS
-   ===================================================== */
+/* =========================
+   LOAD ORDERS
+========================= */
 
-function refreshAdminOrders(){
+function loadOrders(){
+
+    const orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
+
 
     const list =
         document.getElementById("ordersList");
 
 
-    const orders = getOrders();
-
-
     if(orders.length === 0){
 
-        list.innerHTML =
-
-            `<div class="status">
-
-                🫧 No orders yet.
-
-            </div>`;
+        list.innerHTML = `
+            <div class="status">
+                <p>No Orders Yet 🍓</p>
+            </div>
+        `;
 
         return;
+
     }
 
 
     list.innerHTML = "";
 
 
-    orders
-        .slice()
-        .reverse()
-        .forEach(order => {
+    orders.slice().reverse().forEach(order => {
 
-
-        const div =
-            document.createElement("div");
-
-
-        div.className = "order";
-
-
-        let actions = "";
+        let buttons = "";
 
 
         if(order.status === "pending"){
 
-            actions = `
+            buttons = `
 
-                <div class="order-buttons">
+                <button
+                    class="success"
+                    onclick="approveOrder(${order.id})">
+                    ✅ Approve Payment
+                </button>
 
-                    <button
-                        class="approve"
-                        onclick="approveOrder('${order.id}')">
+                <button
+                    class="danger"
+                    onclick="rejectOrder(${order.id})">
+                    ❌ Reject Order
+                </button>
 
-                        ✅ Approve
-
-                    </button>
-
-
-                    <button
-                        class="reject"
-                        onclick="rejectOrder('${order.id}')">
-
-                        ❌ Reject
-
-                    </button>
-
-                </div>
             `;
+
         }
 
 
         if(order.status === "approved"){
 
-            actions = `
-
-                <div class="status success">
-
-                    ✅ Payment Approved
-
-                </div>
-
-
-                <div class="status">
-
-                    🆔 Mochi ID:
-                    <b>
-                        ${escapeHTML(
-                            order.mochiId || "Waiting..."
-                        )}
-                    </b>
-
-                </div>
-
+            buttons = `
 
                 <button
                     class="primary"
-                    onclick="completeOrder('${order.id}')">
-
+                    onclick="markDone(${order.id})">
                     🎉 Mark Order Done
-
                 </button>
+
             `;
+
         }
 
 
-        if(order.status === "rejected"){
+        list.innerHTML += `
 
-            actions = `
+            <div class="order-item">
 
-                <div class="status error">
+                <span class="badge">
+                    ${order.status.toUpperCase()}
+                </span>
 
-                    ❌ Payment Rejected
+                <p>
+                    <strong>Order ID:</strong>
+                    ${order.id}
+                </p>
 
-                </div>
-            `;
-        }
+                <p>
+                    <strong>Name:</strong>
+                    ${escapeHTML(order.name)}
+                </p>
 
+                <p>
+                    <strong>Contact:</strong>
+                    ${escapeHTML(order.contact)}
+                </p>
 
-        if(order.status === "done"){
+                <p>
+                    <strong>Beans:</strong>
+                    ${order.beans.toLocaleString()}
+                </p>
 
-            actions = `
+                <p>
+                    <strong>Amount:</strong>
+                    ${order.price.toLocaleString()} Ks
+                </p>
 
-                <div class="status success">
+                <p>
+                    <strong>Receipt:</strong>
+                    ${escapeHTML(order.receipt)}
+                </p>
 
-                    🎉 ORDER DONE
+                <p>
+                    <strong>Mochi ID:</strong>
+                    ${
+                        order.mochiId
+                        ?
+                        escapeHTML(order.mochiId)
+                        :
+                        "Not submitted"
+                    }
+                </p>
 
-                </div>
-            `;
-        }
+                <p class="small">
+                    ${order.createdAt}
+                </p>
 
-
-        div.innerHTML = `
-
-            <h4>
-                📦 ${escapeHTML(order.id)}
-            </h4>
-
-
-            <p>
-
-                👤 <b>Name:</b>
-                ${escapeHTML(order.name)}
-                <br>
-
-
-                📱 <b>Contact:</b>
-                ${escapeHTML(order.contact)}
-                <br>
-
-
-                🫘 <b>Beans:</b>
-                ${order.beans.toLocaleString()}
-                Beans
-                <br>
-
-
-                💰 <b>Amount:</b>
-                ${order.price.toLocaleString()}
-                Ks
-                <br>
-
-
-                🧾 <b>Receipt:</b>
-
-            </p>
-
-
-            <div class="receipt-name">
-
-                📎 ${escapeHTML(order.receiptName)}
+                ${buttons}
 
             </div>
 
-
-            <p style="margin-top:7px">
-
-                📅 <b>Date:</b>
-                ${escapeHTML(order.date)}
-
-            </p>
-
-
-            ${actions}
-
         `;
 
-
-        list.appendChild(div);
-
     });
+
 }
 
 
-/* =====================================================
+/* =========================
    APPROVE
-   ===================================================== */
+========================= */
 
 function approveOrder(id){
 
-    updateOrderStatus(id,"approved");
+    let orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
 
 
-    if(id === currentOrderId){
-
-        document
-            .getElementById("customerStatus")
-            .innerHTML =
-
-            `✅ Payment verified!<br>
-             Please enter your Mochi ID below.`;
+    const order =
+        orders.find(o => o.id === id);
 
 
-        document
-            .getElementById("mochiIdBox")
-            .classList.remove("hidden");
-
-    }
+    if(!order) return;
 
 
-    refreshAdminOrders();
-
-
-    alert(
-        "Payment approved 🩵"
-    );
-}
-
-
-/* =====================================================
-   REJECT
-   ===================================================== */
-
-function rejectOrder(id){
-
-    if(!confirm(
-        "Reject this payment?"
-    )) return;
-
-
-    updateOrderStatus(
-        id,
-        "rejected"
-    );
-
-
-    if(id === currentOrderId){
-
-        document
-            .getElementById("customerStatus")
-            .innerHTML =
-
-            "❌ Your payment was rejected. Please contact Berry's Shop.";
-    }
-
-
-    refreshAdminOrders();
-}
-
-
-/* =====================================================
-   UPDATE STATUS
-   ===================================================== */
-
-function updateOrderStatus(id,status){
-
-    let orders = getOrders();
-
-
-    orders = orders.map(order => {
-
-        if(order.id === id){
-
-            order.status = status;
-        }
-
-        return order;
-
-    });
+    order.status = "approved";
 
 
     localStorage.setItem(
         "berryOrders",
         JSON.stringify(orders)
     );
+
+
+    /*
+       Payment အောင်မြင်
+       Success Song
+    */
+
+    playSuccessSong();
+
+
+    /*
+       Customer Status
+    */
+
+    if(currentOrderId === id){
+
+        updateCustomerStatus(order);
+
+    }
+
+
+    loadOrders();
+
+
+    alert(
+        "Payment Approved 🎉\n\n" +
+        "Customer က Mochi ID ထည့်နိုင်ပါပြီ။"
+    );
+
 }
 
 
-/* =====================================================
-   MOCHI ID
-   ===================================================== */
+/* =========================
+   REJECT
+========================= */
 
-function sendMochiId(){
+function rejectOrder(id){
+
+    let orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
+
+
+    const order =
+        orders.find(o => o.id === id);
+
+
+    if(!order) return;
+
+
+    order.status = "rejected";
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+
+
+    /*
+       Order Fail Song
+    */
+
+    playFailSong();
+
+
+    if(currentOrderId === id){
+
+        updateCustomerStatus(order);
+
+    }
+
+
+    loadOrders();
+
+
+    alert(
+        "Order Rejected ❌"
+    );
+
+}
+
+
+/* =========================
+   MOCHI ID
+========================= */
+
+function submitMochiId(){
 
     const mochiId =
-        document
-        .getElementById("mochiId")
-        .value.trim();
+        document.getElementById("mochiId").value.trim();
 
 
     if(!mochiId){
 
+        alert("Mochi ID ထည့်ပေးပါ");
+        return;
+
+    }
+
+
+    let orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
+
+
+    const order =
+        orders.find(o => o.id === currentOrderId);
+
+
+    if(!order){
+
+        alert("Order မတွေ့ပါ");
+        return;
+
+    }
+
+
+    order.mochiId = mochiId;
+    order.status = "mochi_id_submitted";
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+
+
+    document.getElementById("mochiIdBox")
+        .classList.add("hidden");
+
+
+    document.getElementById("customerStatus").innerHTML = `
+
+        <h2>📨 MOCHI ID SENT</h2>
+
+        <p>
+        Mochi ID ကို Admin ဆီပို့ပြီးပါပြီ။
+        </p>
+
+        <p class="small" style="margin-top:7px;">
+        Admin က Order ကို Complete လုပ်ပေးပါမယ်။
+        </p>
+
+    `;
+
+
+    alert("Mochi ID ပို့ပြီးပါပြီ 🍓");
+
+}
+
+
+/* =========================
+   MARK DONE
+========================= */
+
+function markDone(id){
+
+    let orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
+
+
+    const order =
+        orders.find(o => o.id === id);
+
+
+    if(!order) return;
+
+
+    if(!order.mochiId){
+
         alert(
-            "Please enter your Mochi ID 🩵"
+            "Customer က Mochi ID မပို့သေးပါ ❗"
         );
 
         return;
+
     }
 
 
-    let orders = getOrders();
-
-
-    orders = orders.map(order => {
-
-        if(order.id === currentOrderId){
-
-            order.mochiId = mochiId;
-        }
-
-        return order;
-
-    });
+    order.status = "done";
 
 
     localStorage.setItem(
@@ -1586,182 +1196,202 @@ function sendMochiId(){
     );
 
 
-    document
-        .getElementById("customerStatus")
-        .innerHTML =
+    /*
+       ORDER DONE
+       Success Song
+    */
 
-        "🩵 Mochi ID received. Please wait for final confirmation.";
+    playSuccessSong();
+
+
+    if(currentOrderId === id){
+
+        updateCustomerStatus(order);
+
+    }
+
+
+    loadOrders();
 
 
     alert(
-        "Mochi ID submitted 🩵"
+        "ORDER DONE 🎉"
     );
 
-
-    refreshAdminOrders();
 }
 
 
-/* =====================================================
-   COMPLETE
-   ===================================================== */
+/* =========================
+   CUSTOMER STATUS
+========================= */
 
-function completeOrder(id){
+function updateCustomerStatus(order){
 
-    let orders = getOrders();
+    const card =
+        document.getElementById("customerStatusCard");
 
-    let target = null;
-
-
-    orders = orders.map(order => {
-
-        if(order.id === id){
-
-            order.status = "done";
-
-            target = order;
-        }
-
-        return order;
-
-    });
+    card.classList.remove("hidden");
 
 
-    localStorage.setItem(
-        "berryOrders",
-        JSON.stringify(orders)
-    );
+    const status =
+        document.getElementById("customerStatus");
 
 
-    if(target){
-
-        document
-            .getElementById("doneCard")
-            .classList.remove("hidden");
+    const mochiBox =
+        document.getElementById("mochiIdBox");
 
 
-        document
-            .getElementById("doneInfo")
-            .innerHTML = `
+    if(order.status === "pending"){
 
-                📦 <b>Order ID:</b>
-                ${escapeHTML(target.id)}
-                <br>
+        status.innerHTML = `
 
+            <h2>⏳ ORDER PENDING</h2>
 
-                👤 <b>Name:</b>
-                ${escapeHTML(target.name)}
-                <br>
+            <p>
+            Payment စစ်ဆေးနေပါတယ်။
+            </p>
 
+        `;
 
-                🫘 <b>Beans:</b>
-                ${target.beans.toLocaleString()}
-                Beans
-                <br>
+        mochiBox.classList.add("hidden");
 
-
-                💰 <b>Amount:</b>
-                ${target.price.toLocaleString()}
-                Ks
-                <br>
-
-
-                🆔 <b>Mochi ID:</b>
-                ${escapeHTML(target.mochiId)}
-
-            `;
-
-
-        document
-            .getElementById("doneCard")
-            .scrollIntoView({
-                behavior:"smooth",
-                block:"center"
-            });
     }
 
 
-    refreshAdminOrders();
+    else if(order.status === "approved"){
+
+        status.innerHTML = `
+
+            <h2>✅ PAYMENT APPROVED</h2>
+
+            <p>
+            Payment အောင်မြင်ပါပြီ။
+            </p>
+
+            <p class="small" style="margin-top:7px;">
+            အောက်မှာ Mochi ID ထည့်ပေးပါ။
+            </p>
+
+        `;
+
+        mochiBox.classList.remove("hidden");
+
+    }
+
+
+    else if(order.status === "rejected"){
+
+        status.innerHTML = `
+
+            <h2 style="color:#d76a76;">
+                ❌ ORDER FAILED
+            </h2>
+
+            <p>
+            သင့် Order ကို Admin က Reject လုပ်ထားပါတယ်။
+            </p>
+
+        `;
+
+        mochiBox.classList.add("hidden");
+
+    }
+
+
+    else if(order.status === "mochi_id_submitted"){
+
+        status.innerHTML = `
+
+            <h2>📨 MOCHI ID RECEIVED</h2>
+
+            <p>
+            Admin က Order ကို Complete လုပ်ပေးနေပါတယ်။
+            </p>
+
+        `;
+
+        mochiBox.classList.add("hidden");
+
+    }
+
+
+    else if(order.status === "done"){
+
+        status.innerHTML = `
+
+            <h2 style="color:#4d9d69;">
+                🎉 ORDER DONE
+            </h2>
+
+            <p>
+            Order အောင်မြင်စွာ ပြီးဆုံးပါပြီ။
+            </p>
+
+            <p style="margin-top:10px;">
+                🍓 ${order.beans.toLocaleString()} Beans
+            </p>
+
+            <p>
+                💰 ${order.price.toLocaleString()} Ks
+            </p>
+
+            <p>
+                🆔 ${escapeHTML(order.mochiId)}
+            </p>
+
+            <p class="small" style="margin-top:8px;">
+                Thank you for shopping at Berry's Shop 💙
+            </p>
+
+        `;
+
+        mochiBox.classList.add("hidden");
+
+    }
+
 }
 
 
-/* =====================================================
-   MUSIC
-   ===================================================== */
+/* =========================
+   AUTO CHECK CUSTOMER ORDER
+========================= */
 
-const music =
-    document.getElementById("music");
+setInterval(() => {
 
-
-let playing = false;
+    if(!currentOrderId) return;
 
 
-function toggleMusic(){
+    const orders =
+        JSON.parse(localStorage.getItem("berryOrders") || "[]");
 
-    if(!playing){
 
-        music.play()
+    const order =
+        orders.find(o => o.id === currentOrderId);
 
-        .then(() => {
 
-            playing = true;
+    if(order){
 
-            document
-                .getElementById("musicBtn")
-                .innerText = "🔊";
-
-        })
-
-        .catch(() => {
-
-            alert(
-                "Music file မတွေ့ပါ။\n\n" +
-                "VID_20260906_123539_210.mp4 ကို " +
-                "index.html နဲ့ folder တစ်ခုတည်းထဲ ထည့်ပါ။"
-            );
-
-        });
+        updateCustomerStatus(order);
 
     }
 
-    else{
-
-        music.pause();
-
-        playing = false;
-
-        document
-            .getElementById("musicBtn")
-            .innerText = "🎵";
-    }
-}
+}, 1000);
 
 
-/* =====================================================
-   SECURITY / HTML ESCAPE
-   ===================================================== */
+/* =========================
+   SECURITY DISPLAY
+========================= */
 
 function escapeHTML(text){
 
     return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-        .replace(/&/g,"&amp;")
-
-        .replace(/</g,"&lt;")
-
-        .replace(/>/g,"&gt;")
-
-        .replace(/"/g,"&quot;")
-
-        .replace(/'/g,"&#039;");
 }
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-refreshAdminOrders();
 
 </script>
 
