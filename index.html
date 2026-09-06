@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Berry's Shop 🩵</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#dff4ff;
+    color:#40546b;
+    min-height:100vh;
+}
+
+button,input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.page{
+    min-height:100vh;
+    overflow:hidden;
+    position:relative;
+}
+
+/* Background decorations */
+
+.bubble{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:0;
+}
+
+.b1{
+    width:190px;
+    height:190px;
+    background:#fff;
+    top:-70px;
+    left:-60px;
+    opacity:.5;
+}
+
+.b2{
+    width:150px;
+    height:150px;
+    background:#bce9ff;
+    right:-60px;
+    top:180px;
+    opacity:.45;
+}
+
+.b3{
+    width:110px;
+    height:110px;
+    background:#fff;
+    left:-45px;
+    bottom:90px;
+    opacity:.45;
+}
+
+/* Header */
+
+.header{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:36px 18px 22px;
+}
+
+.logo{
+    font-family:'Fredoka',sans-serif;
+    font-size:43px;
+    font-weight:700;
+    color:#4b91bd;
+    text-shadow:2px 3px 0 #fff;
+}
+
+.subtitle{
+    margin-top:5px;
+    color:#7597ae;
+    font-size:12px;
+}
+
+.decor{
+    margin-top:13px;
+    font-size:19px;
+}
+
+/* Main */
+
+.container{
+    width:min(700px,92%);
+    margin:auto;
+    position:relative;
+    z-index:2;
+    padding-bottom:55px;
+}
+
+.card{
+    background:rgba(255,255,255,.94);
+    border:2px solid #fff;
+    border-radius:25px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 12px 35px rgba(75,135,165,.14);
+}
+
+.card-title{
+    font-family:'Fredoka',sans-serif;
+    color:#4b91bd;
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.card-desc{
+    font-size:12px;
+    color:#8ba2b4;
+    margin-bottom:17px;
+}
+
+/* Products */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+}
+
+.product{
+    text-align:center;
+    background:#f7fcff;
+    border:2px solid #e1f3fb;
+    border-radius:19px;
+    padding:15px 9px;
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-3px);
+    border-color:#b9e5f8;
+}
+
+.bean{
+    font-size:27px;
+}
+
+.bean-name{
+    color:#536b80;
+    font-size:14px;
+    font-weight:600;
+    margin-top:4px;
+}
+
+.price{
+    color:#4c9bc9;
+    font-size:15px;
+    font-weight:700;
+    margin:4px 0 10px;
+}
+
+.select-btn{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:9px;
+    background:#bde8fb;
+    color:#3f789a;
+    font-weight:700;
+}
+
+.select-btn:hover{
+    background:#a9def5;
+}
+
+/* Form */
+
+label{
+    display:block;
+    margin:12px 0 6px;
+    color:#587187;
+    font-size:13px;
+    font-weight:600;
+}
+
+input{
+    width:100%;
+    padding:12px 14px;
+    border-radius:13px;
+    border:2px solid #e0f1f9;
+    background:#fbfeff;
+    color:#526a7d;
+    outline:none;
+}
+
+input:focus{
+    border-color:#a9dff5;
+}
+
+.primary{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    border-radius:14px;
+    background:#76b9dd;
+    color:white;
+    font-weight:700;
+    box-shadow:0 7px 15px rgba(75,150,195,.18);
+}
+
+.primary:hover{
+    background:#64aacf;
+}
+
+.secondary{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:2px solid #d2edf8;
+    border-radius:14px;
+    background:white;
+    color:#5688a5;
+    font-weight:600;
+}
+
+/* Selected package */
+
+.status{
+    padding:13px;
+    border-radius:14px;
+    margin-top:13px;
+    text-align:center;
+    font-size:13px;
+    background:#effaff;
+    color:#56829b;
+}
+
+.success{
+    background:#eafaf1;
+    color:#4c936e;
+}
+
+.error{
+    background:#fff0f3;
+    color:#b55e6e;
+}
+
+/* Payment */
+
+.wave-box{
+    background:#eaf8ff;
+    border:2px dashed #a9dbf1;
+    border-radius:19px;
+    padding:18px;
+    margin-top:12px;
+}
+
+.wave-title{
+    font-family:'Fredoka',sans-serif;
+    color:#4b91bd;
+    font-size:20px;
+}
+
+.wave-number{
+    color:#3c83af;
+    font-size:22px;
+    font-weight:700;
+    margin-top:7px;
+    letter-spacing:.5px;
+}
+
+.wave-owner{
+    color:#718b9d;
+    font-size:13px;
+    margin-top:2px;
+}
+
+.amount{
+    color:#657c91;
+    font-weight:700;
+    margin-top:9px;
+}
+
+.info{
+    color:#8198a9;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:9px;
+}
+
+/* Admin */
+
+.admin-btn{
+    text-align:center;
+}
+
+.admin-btn button{
+    border:0;
+    background:transparent;
+    color:#7894a8;
+    font-size:12px;
+    text-decoration:underline;
+}
+
+.admin-panel{
+    background:#f7fcff;
+    border:2px solid #d9f0fb;
+    border-radius:20px;
+    padding:17px;
+    margin-top:15px;
+}
+
+.order{
+    background:#fff;
+    border:2px solid #e3f3fa;
+    border-radius:17px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.order h4{
+    font-family:'Fredoka',sans-serif;
+    color:#4e8bae;
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.order p{
+    color:#708799;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.order-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.approve,
+.reject{
+    flex:1;
+    border:0;
+    padding:10px;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.approve{
+    background:#bcebd0;
+    color:#4d8d69;
+}
+
+.reject{
+    background:#ffd5dc;
+    color:#a45d69;
+}
+
+.receipt-name{
+    margin-top:7px;
+    padding:8px;
+    border-radius:10px;
+    background:#f3fbff;
+    color:#62849a;
+    font-size:11px;
+}
+
+/* Done */
+
+.done{
+    text-align:center;
+}
+
+.done-icon{
+    font-size:55px;
+}
+
+.done h2{
+    font-family:'Fredoka',sans-serif;
+    color:#4c9b74;
+    margin:8px 0;
+}
+
+.done-info{
+    background:#f0fbf5;
+    border-radius:17px;
+    padding:15px;
+    text-align:left;
+    font-size:13px;
+    line-height:2;
+}
+
+/* Music */
+
+.music{
+    position:fixed;
+    right:16px;
+    bottom:17px;
+    z-index:20;
+}
+
+.music button{
+    width:53px;
+    height:53px;
+    border:3px solid white;
+    border-radius:50%;
+    background:#8bc7e4;
+    color:white;
+    font-size:21px;
+    box-shadow:0 7px 20px rgba(67,137,173,.25);
+}
+
+/* Footer */
+
+.footer{
+    text-align:center;
+    color:#7f9caf;
+    font-size:11px;
+    padding:20px;
+}
+
+/* Mobile */
+
+@media(max-width:480px){
+
+    .logo{
+        font-size:36px;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .card{
+        padding:17px;
+    }
+
+    .products{
+        gap:9px;
+    }
+
+    .product{
+        padding:13px 7px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        Berry's Shop
+    </div>
+
+    <div class="subtitle">
+        Cute little shop for your Mochi Beans 🩵
+    </div>
+
+    <div class="decor">
+        🫧 🫘 🩵 🍓 🫧
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- PRICE -->
+
+<section class="card">
+
+    <div class="card-title">
+        🫘 Mochi Chat Beans Price
+    </div>
+
+    <div class="card-desc">
+        Choose your favorite Bean package ✨
+    </div>
+
+
+    <div class="products">
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">100 Beans</div>
+            <div class="price">2,100 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(100,2100)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">200 Beans</div>
+            <div class="price">6,500 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(200,6500)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">500 Beans</div>
+            <div class="price">13,000 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(500,13000)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">1,000 Beans</div>
+            <div class="price">19,500 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(1000,19500)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">2,800 Beans</div>
+            <div class="price">45,000 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(2800,45000)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">4,000 Beans</div>
+            <div class="price">47,500 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(4000,47500)">
+                Choose
+            </button>
+        </div>
+
+
+        <div class="product">
+            <div class="bean">🫘</div>
+            <div class="bean-name">6,000 Beans</div>
+            <div class="price">85,000 Ks</div>
+            <button class="select-btn"
+                onclick="chooseBean(6000,85000)">
+                Choose
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ORDER -->
+
+<section class="card hidden" id="orderCard">
+
+    <div class="card-title">
+        🛒 Your Order
+    </div>
+
+    <div class="status" id="selectedPackage"></div>
+
+
+    <label>Your Name</label>
+
+    <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name"
+    >
+
+
+    <label>Telegram / Contact</label>
+
+    <input
+        type="text"
+        id="contact"
+        placeholder="@username"
+    >
+
+
+    <label>Bean Package</label>
+
+    <input
+        type="text"
+        id="beanPackage"
+        readonly
+    >
+
+
+    <label>Total Amount</label>
+
+    <input
+        type="text"
+        id="totalAmount"
+        readonly
+    >
+
+
+    <button class="primary"
+        onclick="showPayment()">
+
+        Continue to Payment 🩵
+
+    </button>
+
+</section>
+
+
+<!-- PAYMENT -->
+
+<section class="card hidden" id="paymentCard">
+
+    <div class="card-title">
+        💳 Wave Payment
+    </div>
+
+
+    <div class="wave-box">
+
+        <div class="wave-title">
+            Wave Money 🩵
+        </div>
+
+
+        <div class="wave-number">
+            09428232096
+        </div>
+
+
+        <div class="wave-owner">
+            NK
+        </div>
+
+
+        <div class="amount">
+            Amount:
+            <span id="paymentAmount">0</span>
+            Ks
+        </div>
+
+
+        <div class="info">
+
+            ① အထက်ပါ Wave နံပါတ်သို့ ငွေလွှဲပါ။<br>
+
+            ② ငွေလွှဲပြီးပါက ပြေစာ Screenshot/File တင်ပါ။<br>
+
+            ③ Admin စစ်ဆေးပြီးမှ Mochi ID တောင်းပါမည်။
+
+        </div>
+
+    </div>
+
+
+    <label>
+        🧾 Payment Receipt
+    </label>
+
+
+    <input
+        type="file"
+        id="receipt"
+        accept="image/*,.pdf"
+    >
+
+
+    <button class="primary"
+        onclick="submitOrder()">
+
+        Submit Order 🫧
+
+    </button>
+
+
+    <div id="submitStatus"></div>
+
+</section>
+
+
+<!-- CUSTOMER STATUS -->
+
+<section
+    class="card hidden"
+    id="customerStatusCard">
+
+    <div class="card-title">
+        📦 Order Status
+    </div>
+
+
+    <div
+        class="status"
+        id="customerStatus">
+
+        🕐 Waiting for Admin verification.
+
+    </div>
+
+
+    <div
+        id="mochiIdBox"
+        class="hidden">
+
+        <label>
+            🆔 Your Mochi ID
+        </label>
+
+
+        <input
+            type="text"
+            id="mochiId"
+            placeholder="Enter your Mochi ID"
+        >
+
+
+        <button
+            class="primary"
+            onclick="sendMochiId()">
+
+            Submit Mochi ID 🩵
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DONE -->
+
+<section
+    class="card hidden done"
+    id="doneCard">
+
+    <div class="done-icon">
+        🎉
+    </div>
+
+
+    <h2>
+        ORDER DONE!
+    </h2>
+
+
+    <p class="card-desc">
+        Your order has been completed successfully 🩵
+    </p>
+
+
+    <div
+        class="done-info"
+        id="doneInfo">
+    </div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section class="card">
+
+    <div class="admin-btn">
+
+        <button onclick="openAdminLogin()">
+
+            🔐 Admin
+
+        </button>
+
+    </div>
+
+
+    <!-- ADMIN LOGIN -->
+
+    <div
+        id="adminLogin"
+        class="hidden">
+
+        <div class="admin-panel">
+
+            <div class="card-title">
+                🔐 Admin Login
+            </div>
+
+
+            <label>
+                Admin PIN
+            </label>
+
+
+            <input
+                type="password"
+                id="adminPin"
+                placeholder="Enter Admin PIN"
+                maxlength="20"
+            >
+
+
+            <button
+                class="primary"
+                onclick="loginAdmin()">
+
+                Login
+
+            </button>
+
+
+            <div id="loginStatus"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN DASHBOARD -->
+
+    <div
+        id="adminDashboard"
+        class="hidden">
+
+        <div class="admin-panel">
+
+            <div class="card-title">
+                👑 Berry's Admin
+            </div>
+
+
+            <div class="card-desc">
+                Manage customer orders
+            </div>
+
+
+            <div id="ordersList"></div>
+
+
+            <button
+                class="secondary"
+                onclick="logoutAdmin()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="footer">
+    Made with 🩵 for Berry's Shop
+</div>
+
+</main>
+
+</div>
+
+
+<!-- MUSIC -->
+
+<div class="music">
+
+    <button
+        onclick="toggleMusic()"
+        id="musicBtn">
+
+        🎵
+
+    </button>
+
+</div>
+
+
+<!--
+IMPORTANT:
+Put this MP4 file in the SAME folder as index.html
+
+VID_20260906_123539_210.mp4
+-->
+
+<video
+    id="music"
+    src="VID_20260906_123539_210.mp4"
+    loop
+    playsinline
+    style="display:none;">
+</video>
+
+
+<script>
+
+/* =====================================================
+   BERRY'S SHOP SETTINGS
+   ===================================================== */
+
+/* Admin PIN */
+const ADMIN_PIN = "2*13";
+
+
+/* Wave Payment */
+const WAVE_NUMBER = "09428232096";
+const WAVE_NAME = "NK";
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+let selectedBeans = 0;
+let selectedPrice = 0;
+let currentOrderId = null;
+
+
+/* =====================================================
+   CHOOSE BEAN
+   ===================================================== */
+
+function chooseBean(beans, price){
+
+    selectedBeans = beans;
+    selectedPrice = price;
+
+
+    document
+        .getElementById("orderCard")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("selectedPackage")
+        .innerText =
+        "🫘 " +
+        beans.toLocaleString() +
+        " Beans — " +
+        price.toLocaleString() +
+        " Ks";
+
+
+    document
+        .getElementById("beanPackage")
+        .value =
+        beans.toLocaleString() + " Beans";
+
+
+    document
+        .getElementById("totalAmount")
+        .value =
+        price.toLocaleString() + " Ks";
+
+
+    document
+        .getElementById("orderCard")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+}
+
+
+/* =====================================================
+   PAYMENT
+   ===================================================== */
+
+function showPayment(){
+
+    const name =
+        document
+        .getElementById("customerName")
+        .value.trim();
+
+
+    const contact =
+        document
+        .getElementById("contact")
+        .value.trim();
+
+
+    if(!name || !contact){
+
+        alert(
+            "Please enter your name and contact information 🩵"
+        );
+
+        return;
+    }
+
+
+    document
+        .getElementById("paymentCard")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("paymentAmount")
+        .innerText =
+        selectedPrice.toLocaleString();
+
+
+    document
+        .getElementById("paymentCard")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+}
+
+
+/* =====================================================
+   SUBMIT ORDER
+   ===================================================== */
+
+function submitOrder(){
+
+    const name =
+        document
+        .getElementById("customerName")
+        .value.trim();
+
+
+    const contact =
+        document
+        .getElementById("contact")
+        .value.trim();
+
+
+    const receipt =
+        document
+        .getElementById("receipt")
+        .files[0];
+
+
+    if(!receipt){
+
+        alert(
+            "Please upload your payment receipt 🧾"
+        );
+
+        return;
+    }
+
+
+    const orderId =
+        "BERRY-" +
+        Date.now().toString().slice(-6);
+
+
+    currentOrderId = orderId;
+
+
+    const order = {
+
+        id:orderId,
+
+        name:name,
+
+        contact:contact,
+
+        beans:selectedBeans,
+
+        price:selectedPrice,
+
+        receiptName:receipt.name,
+
+        status:"pending",
+
+        mochiId:"",
+
+        date:new Date().toLocaleString()
+
+    };
+
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("berryOrders") || "[]"
+        );
+
+
+    orders.push(order);
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+
+
+    document
+        .getElementById("submitStatus")
+        .innerHTML =
+
+        `<div class="status success">
+
+            🩵 Order submitted successfully!<br>
+
+            Order ID:
+            <b>${orderId}</b><br>
+
+            Please wait for Admin verification.
+
+        </div>`;
+
+
+    document
+        .getElementById("customerStatusCard")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("customerStatus")
+        .innerHTML =
+        "🕐 Waiting for Admin to verify your payment.";
+
+
+    document
+        .getElementById("customerStatusCard")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+
+    refreshAdminOrders();
+}
+
+
+/* =====================================================
+   ADMIN LOGIN
+   ===================================================== */
+
+function openAdminLogin(){
+
+    document
+        .getElementById("adminLogin")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("adminPin")
+        .focus();
+}
+
+
+function loginAdmin(){
+
+    const pin =
+        document
+        .getElementById("adminPin")
+        .value;
+
+
+    if(pin === ADMIN_PIN){
+
+        document
+            .getElementById("adminLogin")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("adminDashboard")
+            .classList.remove("hidden");
+
+
+        refreshAdminOrders();
+
+    }
+
+    else{
+
+        document
+            .getElementById("loginStatus")
+            .innerHTML =
+
+            `<div class="status error">
+
+                ❌ Incorrect Admin PIN
+
+            </div>`;
+    }
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logoutAdmin(){
+
+    document
+        .getElementById("adminDashboard")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("adminPin")
+        .value = "";
+}
+
+
+/* =====================================================
+   GET ORDERS
+   ===================================================== */
+
+function getOrders(){
+
+    return JSON.parse(
+        localStorage.getItem("berryOrders") || "[]"
+    );
+}
+
+
+/* =====================================================
+   ADMIN ORDERS
+   ===================================================== */
+
+function refreshAdminOrders(){
+
+    const list =
+        document.getElementById("ordersList");
+
+
+    const orders = getOrders();
+
+
+    if(orders.length === 0){
+
+        list.innerHTML =
+
+            `<div class="status">
+
+                🫧 No orders yet.
+
+            </div>`;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    orders
+        .slice()
+        .reverse()
+        .forEach(order => {
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.className = "order";
+
+
+        let actions = "";
+
+
+        if(order.status === "pending"){
+
+            actions = `
+
+                <div class="order-buttons">
+
+                    <button
+                        class="approve"
+                        onclick="approveOrder('${order.id}')">
+
+                        ✅ Approve
+
+                    </button>
+
+
+                    <button
+                        class="reject"
+                        onclick="rejectOrder('${order.id}')">
+
+                        ❌ Reject
+
+                    </button>
+
+                </div>
+            `;
+        }
+
+
+        if(order.status === "approved"){
+
+            actions = `
+
+                <div class="status success">
+
+                    ✅ Payment Approved
+
+                </div>
+
+
+                <div class="status">
+
+                    🆔 Mochi ID:
+                    <b>
+                        ${escapeHTML(
+                            order.mochiId || "Waiting..."
+                        )}
+                    </b>
+
+                </div>
+
+
+                <button
+                    class="primary"
+                    onclick="completeOrder('${order.id}')">
+
+                    🎉 Mark Order Done
+
+                </button>
+            `;
+        }
+
+
+        if(order.status === "rejected"){
+
+            actions = `
+
+                <div class="status error">
+
+                    ❌ Payment Rejected
+
+                </div>
+            `;
+        }
+
+
+        if(order.status === "done"){
+
+            actions = `
+
+                <div class="status success">
+
+                    🎉 ORDER DONE
+
+                </div>
+            `;
+        }
+
+
+        div.innerHTML = `
+
+            <h4>
+                📦 ${escapeHTML(order.id)}
+            </h4>
+
+
+            <p>
+
+                👤 <b>Name:</b>
+                ${escapeHTML(order.name)}
+                <br>
+
+
+                📱 <b>Contact:</b>
+                ${escapeHTML(order.contact)}
+                <br>
+
+
+                🫘 <b>Beans:</b>
+                ${order.beans.toLocaleString()}
+                Beans
+                <br>
+
+
+                💰 <b>Amount:</b>
+                ${order.price.toLocaleString()}
+                Ks
+                <br>
+
+
+                🧾 <b>Receipt:</b>
+
+            </p>
+
+
+            <div class="receipt-name">
+
+                📎 ${escapeHTML(order.receiptName)}
+
+            </div>
+
+
+            <p style="margin-top:7px">
+
+                📅 <b>Date:</b>
+                ${escapeHTML(order.date)}
+
+            </p>
+
+
+            ${actions}
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+}
+
+
+/* =====================================================
+   APPROVE
+   ===================================================== */
+
+function approveOrder(id){
+
+    updateOrderStatus(id,"approved");
+
+
+    if(id === currentOrderId){
+
+        document
+            .getElementById("customerStatus")
+            .innerHTML =
+
+            `✅ Payment verified!<br>
+             Please enter your Mochi ID below.`;
+
+
+        document
+            .getElementById("mochiIdBox")
+            .classList.remove("hidden");
+
+    }
+
+
+    refreshAdminOrders();
+
+
+    alert(
+        "Payment approved 🩵"
+    );
+}
+
+
+/* =====================================================
+   REJECT
+   ===================================================== */
+
+function rejectOrder(id){
+
+    if(!confirm(
+        "Reject this payment?"
+    )) return;
+
+
+    updateOrderStatus(
+        id,
+        "rejected"
+    );
+
+
+    if(id === currentOrderId){
+
+        document
+            .getElementById("customerStatus")
+            .innerHTML =
+
+            "❌ Your payment was rejected. Please contact Berry's Shop.";
+    }
+
+
+    refreshAdminOrders();
+}
+
+
+/* =====================================================
+   UPDATE STATUS
+   ===================================================== */
+
+function updateOrderStatus(id,status){
+
+    let orders = getOrders();
+
+
+    orders = orders.map(order => {
+
+        if(order.id === id){
+
+            order.status = status;
+        }
+
+        return order;
+
+    });
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+}
+
+
+/* =====================================================
+   MOCHI ID
+   ===================================================== */
+
+function sendMochiId(){
+
+    const mochiId =
+        document
+        .getElementById("mochiId")
+        .value.trim();
+
+
+    if(!mochiId){
+
+        alert(
+            "Please enter your Mochi ID 🩵"
+        );
+
+        return;
+    }
+
+
+    let orders = getOrders();
+
+
+    orders = orders.map(order => {
+
+        if(order.id === currentOrderId){
+
+            order.mochiId = mochiId;
+        }
+
+        return order;
+
+    });
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+
+
+    document
+        .getElementById("customerStatus")
+        .innerHTML =
+
+        "🩵 Mochi ID received. Please wait for final confirmation.";
+
+
+    alert(
+        "Mochi ID submitted 🩵"
+    );
+
+
+    refreshAdminOrders();
+}
+
+
+/* =====================================================
+   COMPLETE
+   ===================================================== */
+
+function completeOrder(id){
+
+    let orders = getOrders();
+
+    let target = null;
+
+
+    orders = orders.map(order => {
+
+        if(order.id === id){
+
+            order.status = "done";
+
+            target = order;
+        }
+
+        return order;
+
+    });
+
+
+    localStorage.setItem(
+        "berryOrders",
+        JSON.stringify(orders)
+    );
+
+
+    if(target){
+
+        document
+            .getElementById("doneCard")
+            .classList.remove("hidden");
+
+
+        document
+            .getElementById("doneInfo")
+            .innerHTML = `
+
+                📦 <b>Order ID:</b>
+                ${escapeHTML(target.id)}
+                <br>
+
+
+                👤 <b>Name:</b>
+                ${escapeHTML(target.name)}
+                <br>
+
+
+                🫘 <b>Beans:</b>
+                ${target.beans.toLocaleString()}
+                Beans
+                <br>
+
+
+                💰 <b>Amount:</b>
+                ${target.price.toLocaleString()}
+                Ks
+                <br>
+
+
+                🆔 <b>Mochi ID:</b>
+                ${escapeHTML(target.mochiId)}
+
+            `;
+
+
+        document
+            .getElementById("doneCard")
+            .scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+    }
+
+
+    refreshAdminOrders();
+}
+
+
+/* =====================================================
+   MUSIC
+   ===================================================== */
+
+const music =
+    document.getElementById("music");
+
+
+let playing = false;
+
+
+function toggleMusic(){
+
+    if(!playing){
+
+        music.play()
+
+        .then(() => {
+
+            playing = true;
+
+            document
+                .getElementById("musicBtn")
+                .innerText = "🔊";
+
+        })
+
+        .catch(() => {
+
+            alert(
+                "Music file မတွေ့ပါ။\n\n" +
+                "VID_20260906_123539_210.mp4 ကို " +
+                "index.html နဲ့ folder တစ်ခုတည်းထဲ ထည့်ပါ။"
+            );
+
+        });
+
+    }
+
+    else{
+
+        music.pause();
+
+        playing = false;
+
+        document
+            .getElementById("musicBtn")
+            .innerText = "🎵";
+    }
+}
+
+
+/* =====================================================
+   SECURITY / HTML ESCAPE
+   ===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+}
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+refreshAdminOrders();
+
+</script>
+
+</body>
+</html>
